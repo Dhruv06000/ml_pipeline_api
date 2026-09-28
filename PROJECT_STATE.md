@@ -6,7 +6,7 @@ Production ML Pipeline, API, & Streamlit UI (Python + SQL + FastAPI + Streamlit 
 
 ## Current Milestone
 
-### Milestone 1 — Setup & Project Scaffolding
+### Milestone 2 — ML Pipeline & Feature Engineering
 
 Status: **In Progress**
 
@@ -15,9 +15,9 @@ Status: **In Progress**
 ## Planned Architecture & Pipeline Flow
 
 ```text
-Database Layer (SQLite / PostgreSQL via SQLAlchemy)
+Database Layer (SQLite via sqlite3)
         │
-        ├── (SQL Extraction & Feature Filtering Query)
+        ├── (SQL Extraction Query via load_data_to_df)
         │
 Python Data Pipeline (Pandas / NumPy)
         │
@@ -45,7 +45,7 @@ Docker Containerization & Cloud Deployment (Render / Hugging Face Spaces)
 
 Setup directory layout, requirements.txt with locked dependencies, virtual environment, and .gitignore.
 
-- [ ] Feature 2: SQL Database Setup & Ingestion Layer
+- [x] Feature 2: SQL Database Setup & Ingestion Layer
 
 Design SQLite/SQLAlchemy database schemas, seed initial data, and write SQL extraction queries for feature filtering.
 
@@ -93,12 +93,15 @@ Milestone 1 — Setup & Architecture Design
 
 - Completed Feature 1: Folder structure, requirements.txt, .gitignore, and Python virtual environment setup.
 
+- Completed Feature 2: Implemented src/database.py with sqlite3 for schema initialization (customers table), seeded mock data, created DataFrame ingestion function (load_data_to_df), and passed automated unit tests (tests/test_database.py)
+
 ## Current Project Structure
 ```
 ml_pipeline_api/
 ├── data/                  # Local SQLite database files & raw datasets (gitignored)
 ├── models/                # Serialized model artifacts (.joblib)
 ├── src/
+│   ├── __init__.py
 │   ├── database.py        # SQL queries & database connection management
 │   ├── pipeline.py        # Feature engineering & ML pipeline construction
 │   └── train.py           # Training script & artifact serialization
@@ -109,6 +112,7 @@ ml_pipeline_api/
 ├── ui/
 │   └── app.py             # Streamlit user interface & feedback component
 ├── tests/                 # Automated pytest suite
+│   ├── __init__.py
 │   ├── test_database.py
 │   ├── test_pipeline.py
 │   └── test_api.py
@@ -124,9 +128,9 @@ ml_pipeline_api/
 
 - Feature 1 (Project Structure & Setup): Completed
 
-- Feature 2 (SQL Database & Ingestion): In Progress
+- Feature 2 (SQL Database & Ingestion): Completed
 
-- ML Pipeline Construction: Pending
+- ML Pipeline Construction: In progress
 
 - FastAPI Serving Layer: Pending
 
@@ -135,7 +139,6 @@ ml_pipeline_api/
 - Containerization & Deployment: Pending
 
 ## Next Milestone
+Feature 3 — Scikit-Learn Pipeline & Feature Engineering
 
-Feature 2 — SQL Database Setup & Ingestion Layer
-
-Goal: Create an SQLite database using SQLAlchemy, write SQL schemas to hold raw feature data, seed sample records, and write Python functions executing SQL queries to load data into Pandas DataFrames.
+Goal: Construct custom Scikit-Learn feature transformers (e.g., categorical encodings, numerical scaling, column transformers) and wrap them inside an end-to-end Pipeline object in src/pipeline.py.
